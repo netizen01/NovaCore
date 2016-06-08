@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name           = 'NovaCore'
-    spec.version        = '0.1'
+    spec.version        = '0.2'
     spec.license        = { :type => 'MIT' }
     spec.homepage       = 'https://github.com/netizen01/NovaCore'
     spec.authors        = { 'Netizen01' => 'n01@invco.de' }
