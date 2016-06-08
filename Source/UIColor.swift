@@ -22,19 +22,19 @@ extension UIColor {
         let size = CGSize(width: cornerRadius * 2 + 1, height: cornerRadius * 2 + 1)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         setFill()
-        let path =  UIBezierPath(roundedRect: CGRect(origin: CGPointZero, size: size), cornerRadius: cornerRadius)
-        path.fill()
-        var image = UIGraphicsGetImageFromCurrentImageContext()
+        UIBezierPath(roundedRect: CGRect(origin: CGPointZero, size: size), cornerRadius: cornerRadius).fill()
+        let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        image = image.resizableImageWithCapInsets(UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius), resizingMode: .Stretch)
-        return image
+        return image.resizableImageWithCapInsets(UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius),
+                                                 resizingMode: .Stretch)
+        
     }
     
-    public func lighter(amount : CGFloat = 0.25) -> UIColor {
+    public func lighter(amount: CGFloat = 0.25) -> UIColor {
         return hueColorWithBrightnessAmount(1 + amount)
     }
     
-    public func darker(amount : CGFloat = 0.25) -> UIColor {
+    public func darker(amount: CGFloat = 0.25) -> UIColor {
         return hueColorWithBrightnessAmount(1 - amount)
     }
     
@@ -50,4 +50,5 @@ extension UIColor {
             return self
         }
     }
+    
 }

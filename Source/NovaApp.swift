@@ -3,7 +3,7 @@
 //  NovaCore
 //
 
-import Foundation
+import UIKit
 
 @objc public class UIApplicationVersion: NSObject {
     
