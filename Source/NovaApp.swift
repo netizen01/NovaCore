@@ -11,7 +11,7 @@ import UIKit
     public var minorVersion: Int = 0
     public var patchVersion: Int = 0
     public var buildNumber: Int = 0
-
+    
     public func toString(major: Bool = true, minor: Bool = true, patch: Bool = true, build: Bool = false) -> String {
         var v: [String] = []
         if major {
@@ -29,22 +29,39 @@ import UIKit
         }
         return version
     }
-
+    
     override public var description: String {
         return toString()
     }
-
+    
+    public convenience init(versionString: String, buildString: NSString) {
+        self.init()
+        
+        let versions = versionString.componentsSeparatedByString(".")
+        if versions.count > 0, let vInt = Int(versions[0]) {
+            majorVersion = vInt
+        }
+        if versions.count > 1, let vInt = Int(versions[1]) {
+            minorVersion = vInt
+        }
+        if versions.count > 2, let vInt = Int(versions[2]) {
+            patchVersion = vInt
+        }
+        
+        buildNumber = buildString.integerValue;
+    }
+    
 }
 
 @objc public class NovaApp: NSObject {
-
+    
     public class func bundleIdentifier() -> String? {
         return NSBundle.mainBundle().infoDictionary?["CFBundleIdentifier"] as? String
     }
-
+    
     public class func applicationVersion() -> UIApplicationVersion {
         let av = UIApplicationVersion()
-
+        
         if let infoDict = NSBundle.mainBundle().infoDictionary {
             if let versionString = infoDict["CFBundleShortVersionString"] as? String {
                 let versions = versionString.componentsSeparatedByString(".")
@@ -62,7 +79,7 @@ import UIKit
                 av.buildNumber = buildNumber.integerValue;
             }
         }
-
+        
         return av
     }
     
