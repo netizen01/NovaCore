@@ -5,7 +5,7 @@
 
 import UIKit
 
-@objc public class UIApplicationVersion: NSObject {
+@objc public class UIApplicationVersion: NSObject, Comparable {
     
     public var majorVersion: Int = 0
     public var minorVersion: Int = 0
@@ -34,7 +34,7 @@ import UIKit
         return toString()
     }
     
-    public convenience init(versionString: String, buildString: NSString) {
+    public convenience init(versionString: String, buildString: NSString? = nil) {
         self.init()
         
         let versions = versionString.componentsSeparatedByString(".")
@@ -48,10 +48,23 @@ import UIKit
             patchVersion = vInt
         }
         
-        buildNumber = buildString.integerValue;
+        buildNumber = buildString?.integerValue ?? 0;
     }
     
 }
+
+public func <(lhs: UIApplicationVersion, rhs: UIApplicationVersion) -> Bool {
+    return lhs.majorVersion < rhs.majorVersion ||
+        (lhs.majorVersion == rhs.majorVersion && lhs.minorVersion < rhs.minorVersion) ||
+        (lhs.majorVersion == rhs.majorVersion && lhs.minorVersion == rhs.minorVersion && lhs.patchVersion < rhs.patchVersion)
+}
+
+public func ==(lhs: UIApplicationVersion, rhs: UIApplicationVersion) -> Bool {
+    return lhs.majorVersion == rhs.majorVersion &&
+        lhs.minorVersion == rhs.minorVersion &&
+        lhs.patchVersion == rhs.patchVersion
+}
+
 
 @objc public class NovaApp: NSObject {
     
