@@ -92,4 +92,20 @@ extension UIColor {
         }
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
+    
+    public var rgba: String {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        if getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            let redInt = Int(red * 255.99999)
+            let greenInt = Int(green * 255.99999)
+            let blueInt = Int(blue * 255.99999)
+            let alphaInt = Int(alpha * 255.99999)
+            return String(format: "#%02x%02x%02x%02x", redInt, greenInt, blueInt, alphaInt)
+        }
+        return "#000000"
+    }
+    
 }
