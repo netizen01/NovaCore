@@ -8,9 +8,10 @@ import UIKit
 extension UIImage {   
     
     public func convertToGrayScale() -> UIImage {
-        let context = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), 8, 0, nil, CGImageAlphaInfo.None.rawValue)
-        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), self.CGImage);
-        let mask = CGBitmapContextCreateImage(context)
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let context = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), 8, 0, colorSpace, CGImageAlphaInfo.None.rawValue)!
+        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), self.CGImage!);
+        let mask = CGBitmapContextCreateImage(context)!
         return UIImage(CGImage: CGImageCreateWithMask(convertToGrayScaleNoAlpha(), mask)!, scale: scale, orientation:imageOrientation)
     }
     
@@ -24,8 +25,8 @@ extension UIImage {
     
     private func convertToGrayScaleNoAlpha() -> CGImageRef {
         let colorSpace = CGColorSpaceCreateDeviceGray()
-        let context = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), 8, 0, colorSpace, CGImageAlphaInfo.None.rawValue)
-        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), self.CGImage)
+        let context = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), 8, 0, colorSpace, CGImageAlphaInfo.None.rawValue)!
+        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), self.CGImage!)
         return CGBitmapContextCreateImage(context)!
     }
     
@@ -49,7 +50,7 @@ extension UIImage {
             
             // draw original image
             CGContextSetBlendMode(context, .Normal)
-            CGContextDrawImage(context, rect, self.CGImage)
+            CGContextDrawImage(context, rect, self.CGImage!)
             
             // tint image (loosing alpha) - the luminosity of the original image is preserved
             CGContextSetBlendMode(context, .Color)
@@ -58,7 +59,7 @@ extension UIImage {
             
             // mask by alpha values of original image
             CGContextSetBlendMode(context, .DestinationIn)
-            CGContextDrawImage(context, rect, self.CGImage)
+            CGContextDrawImage(context, rect, self.CGImage!)
         }
     }
     
@@ -74,7 +75,7 @@ extension UIImage {
             
             // mask by alpha values of original image
             CGContextSetBlendMode(context, .DestinationIn)
-            CGContextDrawImage(context, rect, self.CGImage)
+            CGContextDrawImage(context, rect, self.CGImage!)
         }
     }
     
@@ -93,7 +94,7 @@ extension UIImage {
         
         draw(context, rect)
         
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
