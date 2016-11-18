@@ -5,14 +5,14 @@
 
 import UIKit
 
-@objc public class UIApplicationVersion: NSObject, Comparable {
+@objc open class UIApplicationVersion: NSObject, Comparable {
     
-    public var majorVersion: Int = 0
-    public var minorVersion: Int = 0
-    public var patchVersion: Int = 0
-    public var buildNumber: Int = 0
+    open var majorVersion: Int = 0
+    open var minorVersion: Int = 0
+    open var patchVersion: Int = 0
+    open var buildNumber: Int = 0
     
-    public func toString(major: Bool = true, minor: Bool = true, patch: Bool = true, build: Bool = false) -> String {
+    open func toString(_ major: Bool = true, minor: Bool = true, patch: Bool = true, build: Bool = false) -> String {
         var v: [String] = []
         if major {
             v.append("\(majorVersion)")
@@ -23,21 +23,21 @@ import UIKit
         if patch {
             v.append("\(patchVersion)")
         }
-        var version = v.joinWithSeparator(".")
+        var version = v.joined(separator: ".")
         if build {
             version += " (\(buildNumber))"
         }
         return version
     }
     
-    override public var description: String {
+    override open var description: String {
         return toString()
     }
     
     public convenience init(versionString: String, buildString: NSString? = nil) {
         self.init()
         
-        let versions = versionString.componentsSeparatedByString(".")
+        let versions = versionString.components(separatedBy: ".")
         if versions.count > 0, let vInt = Int(versions[0]) {
             majorVersion = vInt
         }
@@ -66,18 +66,18 @@ public func ==(lhs: UIApplicationVersion, rhs: UIApplicationVersion) -> Bool {
 }
 
 
-@objc public class NovaApp: NSObject {
+@objc open class NovaApp: NSObject {
     
-    public class func bundleIdentifier() -> String? {
-        return NSBundle.mainBundle().infoDictionary?["CFBundleIdentifier"] as? String
+    open class func bundleIdentifier() -> String? {
+        return Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String
     }
     
-    public class func applicationVersion() -> UIApplicationVersion {
+    open class func applicationVersion() -> UIApplicationVersion {
         let av = UIApplicationVersion()
         
-        if let infoDict = NSBundle.mainBundle().infoDictionary {
+        if let infoDict = Bundle.main.infoDictionary {
             if let versionString = infoDict["CFBundleShortVersionString"] as? String {
-                let versions = versionString.componentsSeparatedByString(".")
+                let versions = versionString.components(separatedBy: ".")
                 if versions.count > 0, let vInt = Int(versions[0]) {
                     av.majorVersion = vInt
                 }

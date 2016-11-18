@@ -9,13 +9,13 @@ extension UIImage {
     
     public func convertToGrayScale() -> UIImage {
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let context = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), 8, 0, colorSpace, CGImageAlphaInfo.None.rawValue)!
-        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), self.CGImage!);
-        let mask = CGBitmapContextCreateImage(context)!
-        return UIImage(CGImage: CGImageCreateWithMask(convertToGrayScaleNoAlpha(), mask)!, scale: scale, orientation:imageOrientation)
+        let context = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.none.rawValue)!
+        context.draw(self.cgImage!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height));
+        let mask = context.makeImage()!
+        return UIImage(cgImage: convertToGrayScaleNoAlpha().masking(mask)!, scale: scale, orientation:imageOrientation)
     }
     
-    public class func imageWithColor(color: UIColor, cornerRadius: CGFloat) -> UIImage {
+    public class func imageWithColor(_ color: UIColor, cornerRadius: CGFloat) -> UIImage {
         return color.resizableImage(cornerRadius)
     }
     
@@ -23,11 +23,11 @@ extension UIImage {
 
 extension UIImage {
     
-    private func convertToGrayScaleNoAlpha() -> CGImageRef {
+    fileprivate func convertToGrayScaleNoAlpha() -> CGImage {
         let colorSpace = CGColorSpaceCreateDeviceGray()
-        let context = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), 8, 0, colorSpace, CGImageAlphaInfo.None.rawValue)!
-        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), self.CGImage!)
-        return CGBitmapContextCreateImage(context)!
+        let context = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.none.rawValue)!
+        context.draw(self.cgImage!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        return context.makeImage()!
     }
     
 }
@@ -40,46 +40,46 @@ extension UIImage {
     // this is similar to Photoshop's "Color" layer blend mode
     // this is perfect for non-greyscale source images, and images that have both highlights and shadows that should be preserved
     // white will stay white and black will stay black as the lightness of the image is preserved
-    public func tint(tintColor: UIColor) -> UIImage {
+    public func tint(_ tintColor: UIColor) -> UIImage {
         
         return modifiedImage { context, rect in
             // draw black background - workaround to preserve color of partially transparent pixels
-            CGContextSetBlendMode(context, .Normal)
-            UIColor.blackColor().setFill()
-            CGContextFillRect(context, rect)
+            context.setBlendMode(.normal)
+            UIColor.black.setFill()
+            context.fill(rect)
             
             // draw original image
-            CGContextSetBlendMode(context, .Normal)
-            CGContextDrawImage(context, rect, self.CGImage!)
+            context.setBlendMode(.normal)
+            context.draw(self.cgImage!, in: rect)
             
             // tint image (loosing alpha) - the luminosity of the original image is preserved
-            CGContextSetBlendMode(context, .Color)
+            context.setBlendMode(.color)
             tintColor.setFill()
-            CGContextFillRect(context, rect)
+            context.fill(rect)
             
             // mask by alpha values of original image
-            CGContextSetBlendMode(context, .DestinationIn)
-            CGContextDrawImage(context, rect, self.CGImage!)
+            context.setBlendMode(.destinationIn)
+            context.draw(self.cgImage!, in: rect)
         }
     }
     
     // fills the alpha channel of the source image with the given color
     // any color information except to the alpha channel will be ignored
-    public func fillAlpha(fillColor: UIColor) -> UIImage {
+    public func fillAlpha(_ fillColor: UIColor) -> UIImage {
         
         return modifiedImage { context, rect in
             // draw tint color
-            CGContextSetBlendMode(context, .Normal)
+            context.setBlendMode(.normal)
             fillColor.setFill()
-            CGContextFillRect(context, rect)
+            context.fill(rect)
             
             // mask by alpha values of original image
-            CGContextSetBlendMode(context, .DestinationIn)
-            CGContextDrawImage(context, rect, self.CGImage!)
+            context.setBlendMode(.destinationIn)
+            context.draw(self.cgImage!, in: rect)
         }
     }
     
-    private func modifiedImage(@noescape draw: (CGContext, CGRect) -> ()) -> UIImage {
+    fileprivate func modifiedImage(_ draw: (CGContext, CGRect) -> ()) -> UIImage {
         
         // using scale correctly preserves retina images
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
@@ -87,10 +87,10 @@ extension UIImage {
         assert(context != nil)
         
         // correctly rotate image
-        CGContextTranslateCTM(context, 0, size.height);
-        CGContextScaleCTM(context, 1.0, -1.0);
+        context.translateBy(x: 0, y: size.height);
+        context.scaleBy(x: 1.0, y: -1.0);
         
-        let rect = CGRectMake(0.0, 0.0, size.width, size.height)
+        let rect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
         
         draw(context, rect)
         

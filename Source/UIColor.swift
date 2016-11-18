@@ -8,37 +8,37 @@ import UIKit
 extension UIColor {
     
     public func pixel() -> UIImage {
-        let rect = CGRectMake(0, 0, 1, 1)
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
         let ctx = UIGraphicsGetCurrentContext()!
-        CGContextSetFillColorWithColor(ctx, CGColor)
-        CGContextFillRect(ctx, rect)
+        ctx.setFillColor(cgColor)
+        ctx.fill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
     
-    public func resizableImage(cornerRadius: CGFloat) -> UIImage {
+    public func resizableImage(_ cornerRadius: CGFloat) -> UIImage {
         let size = CGSize(width: cornerRadius * 2 + 1, height: cornerRadius * 2 + 1)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         setFill()
-        UIBezierPath(roundedRect: CGRect(origin: CGPointZero, size: size), cornerRadius: cornerRadius).fill()
+        UIBezierPath(roundedRect: CGRect(origin: CGPoint.zero, size: size), cornerRadius: cornerRadius).fill()
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        return image.resizableImageWithCapInsets(UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius),
-                                                 resizingMode: .Stretch)
+        return image.resizableImage(withCapInsets: UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius),
+                                                 resizingMode: .stretch)
         
     }
     
-    public func lighter(amount: CGFloat = 0.25) -> UIColor {
+    public func lighter(_ amount: CGFloat = 0.25) -> UIColor {
         return hueColorWithBrightnessAmount(1 + amount)
     }
     
-    public func darker(amount: CGFloat = 0.25) -> UIColor {
+    public func darker(_ amount: CGFloat = 0.25) -> UIColor {
         return hueColorWithBrightnessAmount(1 - amount)
     }
     
-    public func hueColorWithBrightnessAmount(amount: CGFloat) -> UIColor {
+    public func hueColorWithBrightnessAmount(_ amount: CGFloat) -> UIColor {
         var hue: CGFloat = 0
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
@@ -61,11 +61,11 @@ extension UIColor {
         var alpha: CGFloat = 1.0
         
         if rgba.hasPrefix("#") {
-            let index = rgba.startIndex.advancedBy(1)
-            let hex = rgba.substringFromIndex(index)
-            let scanner = NSScanner(string: hex)
+            let index = rgba.characters.index(rgba.startIndex, offsetBy: 1)
+            let hex = rgba.substring(from: index)
+            let scanner = Scanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
-            if scanner.scanHexLongLong(&hexValue) {
+            if scanner.scanHexInt64(&hexValue) {
                 switch (hex.characters.count) {
                 case 3:
                     red = CGFloat((hexValue & 0xF00) >> 8) / 15.0
@@ -115,14 +115,14 @@ extension UIColor {
     /// - parameter color: The color to mix with
     /// - parameter amount: The amount (0-1) to mix the new color in.
     /// - returns: A new UIColor instance representing the resulting color
-    public func mixWithColor(color: UIColor, amount: Float) -> UIColor {
-        var comp1: [CGFloat] = Array(count: 4, repeatedValue: 0);
+    public func mixWithColor(_ color: UIColor, amount: Float) -> UIColor {
+        var comp1: [CGFloat] = Array(repeating: 0, count: 4);
         self.getRed(&comp1[0], green: &comp1[1], blue: &comp1[2], alpha: &comp1[3])
         
-        var comp2: [CGFloat] = Array(count: 4, repeatedValue: 0);
+        var comp2: [CGFloat] = Array(repeating: 0, count: 4);
         color.getRed(&comp2[0], green: &comp2[1], blue: &comp2[2], alpha: &comp2[3])
         
-        var comp: [CGFloat] = Array(count: 4, repeatedValue: 0);
+        var comp: [CGFloat] = Array(repeating: 0, count: 4);
         for i in 0...3 {
             comp[i] = comp1[i] + (comp2[i] - comp1[i]) * CGFloat(amount)
         }
@@ -150,7 +150,7 @@ extension UIColor {
     
 }
 
-private func getColorComponents(value: Int) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
+private func getColorComponents(_ value: Int) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
     let r = CGFloat(value >> 16 & 0xFF) / 255.0
     let g = CGFloat(value >> 8 & 0xFF) / 255.0
     let b = CGFloat(value & 0xFF) / 255.0

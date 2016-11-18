@@ -14,7 +14,7 @@ extension UIFont {
                 UIFontFeatureSelectorIdentifierKey: kMonospacedNumbersSelector
             ]
         ]
-        let monoDescriptor = fontDescriptor().fontDescriptorByAddingAttributes(
+        let monoDescriptor = fontDescriptor.addingAttributes(
             [UIFontDescriptorFeatureSettingsAttribute: features]
         )
         return UIFont(descriptor: monoDescriptor, size: pointSize)
