@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
     spec.name           = 'NovaCore'
-    spec.version        = '0.3'
+    spec.version        = '0.4'
     spec.summary        = 'Common Extensions and Utilities for Nova Packages'
 
     spec.homepage       = 'https://github.com/netizen01/NovaCore'
