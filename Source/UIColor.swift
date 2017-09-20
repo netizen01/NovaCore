@@ -61,8 +61,7 @@ extension UIColor {
         var alpha: CGFloat = 1.0
         
         if rgba.hasPrefix("#") {
-            let index = rgba.characters.index(rgba.startIndex, offsetBy: 1)
-            let hex = rgba.substring(from: index)
+            let hex = String(rgba.dropFirst())
             let scanner = Scanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
             if scanner.scanHexInt64(&hexValue) {
@@ -128,10 +127,10 @@ extension UIColor {
         var comp2a: CGFloat = 0
         color.getRed(&comp2r, green: &comp2g, blue: &comp2b, alpha: &comp2a)
         
-        var compr: CGFloat = comp1r + (comp2r - comp1r) * CGFloat(amount)
-        var compg: CGFloat = comp1g + (comp2g - comp1g) * CGFloat(amount)
-        var compb: CGFloat = comp1b + (comp2b - comp1b) * CGFloat(amount)
-        var compa: CGFloat = comp1a + (comp2a - comp1a) * CGFloat(amount)
+        let compr: CGFloat = comp1r + (comp2r - comp1r) * CGFloat(amount)
+        let compg: CGFloat = comp1g + (comp2g - comp1g) * CGFloat(amount)
+        let compb: CGFloat = comp1b + (comp2b - comp1b) * CGFloat(amount)
+        let compa: CGFloat = comp1a + (comp2a - comp1a) * CGFloat(amount)
         
         return UIColor(red:compr, green: compg, blue: compb, alpha: compa)
     }
