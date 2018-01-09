@@ -11,6 +11,9 @@
 		8DB1B7E1200430DF00F2D16C /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB1B7E0200430DF00F2D16C /* URL.swift */; };
 		8DB1B7E32004313400F2D16C /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB1B7E22004313400F2D16C /* UIImageView.swift */; };
 		8DB1B7E52004319E00F2D16C /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB1B7E42004319E00F2D16C /* UIFont.swift */; };
+		8DB1B7E920051A9C00F2D16C /* NovaRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB1B7E620051A9C00F2D16C /* NovaRandom.swift */; };
+		8DB1B7EA20051A9C00F2D16C /* NovaScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB1B7E720051A9C00F2D16C /* NovaScroller.swift */; };
+		8DB1B7EB20051A9C00F2D16C /* NovaMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB1B7E820051A9C00F2D16C /* NovaMath.swift */; };
 		8DE543511D087AC8008D1077 /* NovaCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DE543501D087AC8008D1077 /* NovaCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DE5435F1D087AE2008D1077 /* Easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE543591D087AE2008D1077 /* Easing.swift */; };
 		8DE543601D087AE2008D1077 /* NovaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5435A1D087AE2008D1077 /* NovaApp.swift */; };
@@ -25,6 +28,9 @@
 		8DB1B7E0200430DF00F2D16C /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		8DB1B7E22004313400F2D16C /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		8DB1B7E42004319E00F2D16C /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		8DB1B7E620051A9C00F2D16C /* NovaRandom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NovaRandom.swift; sourceTree = "<group>"; };
+		8DB1B7E720051A9C00F2D16C /* NovaScroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NovaScroller.swift; sourceTree = "<group>"; };
+		8DB1B7E820051A9C00F2D16C /* NovaMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NovaMath.swift; sourceTree = "<group>"; };
 		8DE5434D1D087AC8008D1077 /* NovaCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NovaCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DE543501D087AC8008D1077 /* NovaCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaCore.h; sourceTree = "<group>"; };
 		8DE543521D087AC8008D1077 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +84,9 @@
 			children = (
 				8DE543591D087AE2008D1077 /* Easing.swift */,
 				8DE5435A1D087AE2008D1077 /* NovaApp.swift */,
+				8DB1B7E820051A9C00F2D16C /* NovaMath.swift */,
+				8DB1B7E620051A9C00F2D16C /* NovaRandom.swift */,
+				8DB1B7E720051A9C00F2D16C /* NovaScroller.swift */,
 				8DE5435B1D087AE2008D1077 /* NovaTime.swift */,
 				8DE5435C1D087AE2008D1077 /* UIButton.swift */,
 				8DE5435D1D087AE2008D1077 /* UIColor.swift */,
@@ -171,8 +180,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DE5435F1D087AE2008D1077 /* Easing.swift in Sources */,
+				8DB1B7EB20051A9C00F2D16C /* NovaMath.swift in Sources */,
 				8DB1B7E32004313400F2D16C /* UIImageView.swift in Sources */,
 				8DE543611D087AE2008D1077 /* NovaTime.swift in Sources */,
+				8DB1B7EA20051A9C00F2D16C /* NovaScroller.swift in Sources */,
+				8DB1B7E920051A9C00F2D16C /* NovaRandom.swift in Sources */,
 				8DE543601D087AE2008D1077 /* NovaApp.swift in Sources */,
 				8DB1B7DF200430C200F2D16C /* UIView.swift in Sources */,
 				8DE543641D087AE2008D1077 /* UIImage.swift in Sources */,
