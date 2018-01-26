@@ -9,6 +9,12 @@ public class NovaScroller {
     
     public typealias NovaScrollerCallback = (Bool) -> Void
     
+    public var pause: Double = 0
+    public var direction: Bool = true
+    public weak var scrollView: UIScrollView?
+    public var pointsPerSecond: CGFloat = 100
+    public var callback: NovaScrollerCallback?
+    
     class Linker {
         weak var scroller: NovaScroller?
         
@@ -23,13 +29,7 @@ public class NovaScroller {
     
     private var displayLink: CADisplayLink?
     private var lastTick: Double = 0
-    
-    public var pause: Double = 0
     private var pauseRemaining: Double = 0
-    public var direction: Bool = true
-    weak var scrollView: UIScrollView?
-    public var pointsPerSecond: CGFloat = 100
-    public var callback: NovaScrollerCallback?
     
     public init() {
         
