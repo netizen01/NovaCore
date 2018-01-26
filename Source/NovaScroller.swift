@@ -31,6 +31,10 @@ public class NovaScroller {
     public var pointsPerSecond: CGFloat = 100
     public var callback: NovaScrollerCallback?
     
+    public init() {
+        
+    }
+    
     deinit {
         end()
     }
