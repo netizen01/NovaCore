@@ -19,7 +19,7 @@ extension UIView {
         addMotionEffect(group)
     }
     
-    public class func loadFromNibNamed<T: UIView>(_ nibNamed: String, bundle: Bundle? = nil, owner: Any? = nil, options: [AnyHashable: Any]? = nil) -> T? {
-        return UINib(nibName: nibNamed, bundle: bundle).instantiate(withOwner: owner, options: options)[0] as? T
+    public class func loadFromNibNamed<T: UIView>(_ nibNamed: String, bundle: Bundle? = nil, owner: Any? = nil, options: [UINib.OptionsKey: Any]? = nil) -> T? {
+        return UINib(nibName: nibNamed, bundle: bundle).instantiate(withOwner: owner, options: options ?? [:])[0] as? T
     }
 }

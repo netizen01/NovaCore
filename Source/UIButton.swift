@@ -14,11 +14,11 @@ extension UIButton {
         templateImageForState(.disabled)
     }
     
-    public func templateImageForState(_ state: UIControlState) {
+    public func templateImageForState(_ state: UIControl.State) {
         setImage(image(for: state)?.withRenderingMode(.alwaysTemplate), for: state)
     }
     
-    public func setBackgroundColor(_ color: UIColor, forState state: UIControlState) {
+    public func setBackgroundColor(_ color: UIColor, forState state:UIControl.State) {
         setBackgroundImage(color.pixel(), for: state)
     }
     

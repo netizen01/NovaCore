@@ -47,7 +47,7 @@ public class NovaScroller {
         } else {
             displayLink?.frameInterval = 1
         }
-        displayLink?.add(to: RunLoop.current, forMode: .commonModes)
+        displayLink?.add(to: RunLoop.current, forMode: .common)
     }
     
     public func end() {
