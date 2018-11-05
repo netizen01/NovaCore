@@ -28,3 +28,22 @@ extension Array where Iterator.Element == Double {
         return sqrt(sumOfSquaredDifferences / Double(count))
     }
 }
+
+
+public typealias Rational = (num: Int, den: Int)
+extension Double {
+    
+    public func rationalApproximation(withPrecision eps: Double = 1.0e-6) -> Rational {
+        var x = self
+        var a = x.rounded(.down)
+        var (h1, k1, h, k) = (1, 0, Int(a), 1)
+        
+        while x - a > eps * Double(k) * Double(k) {
+            x = 1.0 / (x - a)
+            a = x.rounded(.down)
+            (h1, k1, h, k) = (h, k, h1 + Int(a) * h, k1 + Int(a) * k)
+        }
+        return (h, k)
+    }
+
+}
