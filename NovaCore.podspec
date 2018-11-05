@@ -14,6 +14,5 @@ Pod::Spec.new do |spec|
     spec.source                 = { :git => 'https://github.com/netizen01/NovaCore.git',
                                     :tag => spec.version.to_s }
     spec.source_files           = 'Source/**/*.swift'
-    spec.pod_target_xcconfig    = { 'SWIFT_VERSION' => '4.2' }
-
+    spec.swift_version          = '4.2'
 end
