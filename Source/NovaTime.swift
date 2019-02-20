@@ -18,6 +18,20 @@ extension Double {
         return String(format: "%02d:%02d.%01d", mins, secs, fraction)
     }
     
+    public var timeMSFTrimmed: String {
+        if self == Double.infinity { return "∞" }
+        var elapsed = self
+        let mins = Int(floor(elapsed / 60.0))
+        if mins == 0 {
+            return self.timeSF
+        }
+        elapsed -= Double(mins * 60)
+        let secs = Int(floor(elapsed))
+        elapsed -= Double(secs)
+        let fraction = Int(elapsed * 10)
+        return String(format: "%02d:%02d.%01d", mins, secs, fraction)
+    }
+    
     public var timeMSM: String {
         if self == Double.infinity { return "∞" }
         var elapsed = self
