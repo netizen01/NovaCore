@@ -14,5 +14,5 @@ Pod::Spec.new do |spec|
     spec.source                 = { :git => 'https://github.com/netizen01/NovaCore.git',
                                     :tag => spec.version.to_s }
     spec.source_files           = 'Source/**/*.swift'
-    spec.swift_version          = '5.0'
+    spec.swift_versions         = ['5.0']
 end
