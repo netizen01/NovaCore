@@ -39,7 +39,7 @@ extension Double {
         elapsed -= Double(mins * 60)
         let secs = Int(floor(elapsed))
         elapsed -= Double(secs)
-        let fraction = Int(ceil(elapsed * 1000))
+        let fraction = Int(roundl(elapsed * 1000))
         return String(format: "%02d:%02d.%03d", mins, secs, fraction)
     }
     
@@ -48,7 +48,7 @@ extension Double {
         var elapsed = self
         let secs = Int(floor(elapsed))
         elapsed -= Double(secs)
-        let fraction = Int(ceil(elapsed * 1000))
+        let fraction = Int(roundl(elapsed * 1000))
         return String(format: "%02d.%03d", secs, fraction)
     }
     
@@ -62,7 +62,7 @@ extension Double {
         elapsed -= Double(mins * 60)
         let secs = Int(floor(elapsed))
         elapsed -= Double(secs)
-        let fraction = Int(ceil(elapsed * 1000))
+        let fraction = Int(roundl(elapsed * 1000))
         return String(format: "%02d:%02d.%03d", mins, secs, fraction)
     }
     
