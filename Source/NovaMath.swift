@@ -18,7 +18,7 @@ extension Array where Iterator.Element == Double {
     }
     
     public func mean() -> Double {
-        return count == 0 ? 0 : reduce(0) { $0 + $1 } / Double(count)
+        return count == 0 ? 0 : total() / Double(count)
     }
     
     public func standardDeviation() -> Double? {
@@ -27,6 +27,11 @@ extension Array where Iterator.Element == Double {
         let sumOfSquaredDifferences = reduce(0) { $0 + pow($1 - m, 2) }
         return sqrt(sumOfSquaredDifferences / Double(count))
     }
+
+    public func total() -> Double {
+        return reduce(0) { $0 + $1 }
+    }
+    
 }
 
 
