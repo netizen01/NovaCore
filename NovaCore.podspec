@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
     spec.name                   = 'NovaCore'
-    spec.version                = '0.8'
+    spec.version                = '0.9'
     spec.summary                = 'Common Extensions and Utilities for Nova Packages'
 
     spec.homepage               = 'https://github.com/netizen01/NovaCore'
@@ -13,6 +13,6 @@ Pod::Spec.new do |spec|
 
     spec.source                 = { :git => 'https://github.com/netizen01/NovaCore.git',
                                     :tag => spec.version.to_s }
-    spec.source_files           = 'Source/**/*.swift'
+    spec.source_files           = 'Sources/**/*.swift'
     spec.swift_versions         = ['5.0']
 end
