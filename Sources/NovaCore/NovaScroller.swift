@@ -42,7 +42,7 @@ public class NovaScroller {
     public func begin() {
         lastTick = 0
         displayLink = CADisplayLink(target: Linker(scroller: self), selector: #selector(Linker.displayLinkTick))
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, tvOS 10.0, *) {
             displayLink?.preferredFramesPerSecond = 60
         } else {
             displayLink?.frameInterval = 1
